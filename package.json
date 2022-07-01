@@ -1,0 +1,20 @@
+{
+  "name": "d-blog-dapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lakshit-Chiranjiv/D-Blog-Dapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lakshit-Chiranjiv/D-Blog-Dapp/issues"
+  },
+  "homepage": "https://github.com/Lakshit-Chiranjiv/D-Blog-Dapp#readme"
+}
