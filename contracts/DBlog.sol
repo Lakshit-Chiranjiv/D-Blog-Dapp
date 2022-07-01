@@ -6,10 +6,12 @@ contract DBlog{
 
     address payable contractOwner;
     uint blogCount;
+    string contractName;
 
 
     constructor() payable{
         contractOwner = payable(msg.sender);
+        contractName = "Decentralized Blog App";
     }
 
     struct Blog{
@@ -33,6 +35,10 @@ contract DBlog{
     //contract owner will get 0.001 ether everytime a blog is sold
     //the blog seller will get (salePrice - 0.001 ether)ether on selling a blog
     //the blog buyer will pay the salePrice amount and from that the seller and contractOwner will get their share
+
+    function getContractName() public view returns(string memory){
+        return contractName;
+    }
 
     function readBlog(uint blogId) public {
         if(msg.sender != blogOwnersMap[blogId]){
