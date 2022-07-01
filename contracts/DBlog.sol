@@ -77,4 +77,6 @@ contract DBlog{
         return blogList;
     }
 
+    receive () external payable{} 
+
 }
