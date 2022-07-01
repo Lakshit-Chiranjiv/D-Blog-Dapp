@@ -39,4 +39,16 @@ contract DBlog{
             payable(blogOwnersMap[blogId]).transfer(0.0001 ether);
         }
     }
+
+    function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice,bool _onSale) public payable{
+        require(msg.value == 0.01 ether,"It costs 0.01 ether to create a blog");
+        require((_salePrice * 0.001 ether) > 0.001 ether,"Sale price should be more than 0.001 ether");
+        require(bytes(_blogTitle).length > 3,"Blog title length should be more than 3 characters");
+        blogList.push(Blog(blogCount,msg.sender,msg.sender,_blogTitle,_blogBody,0,(_salePrice * (0.001 ether)),_onSale));
+        blogOwnersMap[blogCount] = msg.sender;
+        blogCount++;
+    }
+
+
+
 }
