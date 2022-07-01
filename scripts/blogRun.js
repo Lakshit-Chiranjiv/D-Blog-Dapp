@@ -9,6 +9,13 @@ async function main() {
 
   let contractName = await dblogContract.getContractName();
   console.log(contractName);
+
+  let txn = await dblogContract.createBlog('Some blog title','Blog body is lorem ipsum',4,true,{ value: ethers.utils.parseEther("0.01") });
+  await txn.wait();
+  console.log("A new blog created");
+
+  let blogDetails = await dblogContract.getABlog(0);
+  console.log(blogDetails);
 }
 
 main()
