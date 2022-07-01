@@ -6,4 +6,10 @@ contract DBlog{
 
     address payable contractOwner;
     uint blogCount;
+
+
+    constructor() payable{
+        contractOwner = payable(msg.sender);
+    }
+
 }
