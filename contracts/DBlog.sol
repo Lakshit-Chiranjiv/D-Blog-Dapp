@@ -69,4 +69,8 @@ contract DBlog{
         blogOwnersMap[blogId] = msg.sender;
     }
 
+    function getABlog(uint blogId) public view returns(Blog memory){
+        return blogList[blogId];
+    }
+
 }
