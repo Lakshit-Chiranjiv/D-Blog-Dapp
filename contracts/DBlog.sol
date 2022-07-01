@@ -25,5 +25,7 @@ contract DBlog{
 
     Blog[] blogList;
 
+    mapping(uint => address) blogOwnersMap;
+
 
 }
