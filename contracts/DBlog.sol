@@ -12,4 +12,16 @@ contract DBlog{
         contractOwner = payable(msg.sender);
     }
 
+    struct Blog{
+        uint blogId;
+        address blogOwner;
+        address blogCreator;
+        string blogTitle;
+        string blogBody;
+        uint numOfReads;
+        uint salePrice;
+        bool onSale;
+    }
+
+
 }
