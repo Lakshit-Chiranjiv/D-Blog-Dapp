@@ -49,6 +49,9 @@ contract DBlog{
         blogCount++;
     }
 
-
+    function putBlogOnSale(uint blogId) public{
+        require(msg.sender == blogOwnersMap[blogId],"Only owner of blog can put it on sale");
+        blogList[blogId].onSale = true;
+    }
 
 }
