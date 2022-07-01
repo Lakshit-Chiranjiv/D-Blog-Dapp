@@ -73,4 +73,8 @@ contract DBlog{
         return blogList[blogId];
     }
 
+    function getAllBlogs() public view returns(Blog[] memory){
+        return blogList;
+    }
+
 }
