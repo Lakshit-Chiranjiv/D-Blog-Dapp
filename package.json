@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Lakshit-Chiranjiv/D-Blog-Dapp/issues"
   },
-  "homepage": "https://github.com/Lakshit-Chiranjiv/D-Blog-Dapp#readme"
+  "homepage": "https://github.com/Lakshit-Chiranjiv/D-Blog-Dapp#readme",
+  "devDependencies": {
+    "hardhat": "^2.9.9"
+  }
 }
