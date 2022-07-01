@@ -27,5 +27,11 @@ contract DBlog{
 
     mapping(uint => address) blogOwnersMap;
 
+    function readBlog(uint blogId) public {
+        if(msg.sender != blogOwnersMap[blogId]){
+            payable(blogOwnersMap[blogId]).transfer(1 ether);
+        }
+    }
+
 
 }
