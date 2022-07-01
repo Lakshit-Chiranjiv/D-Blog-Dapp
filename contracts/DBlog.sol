@@ -23,5 +23,7 @@ contract DBlog{
         bool onSale;
     }
 
+    Blog[] blogList;
+
 
 }
