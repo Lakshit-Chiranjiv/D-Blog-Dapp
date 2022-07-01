@@ -6,6 +6,9 @@ async function main() {
   await dblogContract.deployed();
 
   console.log("DBlog contract deployed to:", dblogContract.address);
+
+  let contractName = await dblogContract.getContractName();
+  console.log(contractName);
 }
 
 main()
