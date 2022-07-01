@@ -59,4 +59,14 @@ contract DBlog{
         blogList[blogId].onSale = false;
     }
 
+    function buyBlog(uint blogId) public payable{
+        require(msg.sender != blogOwnersMap[blogId],"Owner can't buy his/her own blog");
+        require(blogList[blogId].onSale == true,"Blog is not on sale");
+        require(msg.value == blogList[blogId].salePrice,"Pay the exact blog sale amount to buy");
+        payable(blogList[blogId].blogOwner).transfer(blogList[blogId].salePrice - (0.001 ether));
+        payable(contractOwner).transfer(0.001 ether);
+        blogList[blogId].blogOwner = msg.sender;
+        blogOwnersMap[blogId] = msg.sender;
+    }
+
 }
