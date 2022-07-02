@@ -1,22 +1,24 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
+
+let DBlog;
+let dblogContract;
+
+beforeEach(async function () {
+  DBlog = await ethers.getContractFactory("DBlog");
+  dblogContract = await DBlog.deploy();
+  await dblogContract.deployed();
+});
+
 describe("Dblog contract", function () {
 
   it("Should return correct contract name", async function () {
-    const [owner,user1,user2] = await ethers.getSigners();
-    const DBlog = await ethers.getContractFactory("DBlog");
-    const dblogContract = await DBlog.deploy();
-    await dblogContract.deployed();
     expect(await dblogContract.getContractName()).to.equal("Decentralized Blog App");
   });
 
   it("Should create a blog with passed blog Details", async function () {
-    const [owner,user1,user2] = await ethers.getSigners();
-    const DBlog = await ethers.getContractFactory("DBlog");
-    const dblogContract = await DBlog.deploy();
-    await dblogContract.deployed();
-
+    const [owner] = await ethers.getSigners();
     let txn = await dblogContract.createBlog('Sample blog title','Blog body is lorem ipsum',4,true,{ value: ethers.utils.parseEther("0.01") });
     await txn.wait();
     let blogDetails = await dblogContract.getABlog(0);
