@@ -18,7 +18,7 @@ async function main() {
         //create blog
         let txn = await dblogContract.createBlog('Some blog title','Blog body is lorem ipsum',4,true,{ value: ethers.utils.parseEther("0.01") });
         await txn.wait();
-        console.log("A new blog created");
+        console.log("A new blog created",txn.value);
       
         //get A Blog
         let blogDetails = await dblogContract.getABlog(0);
