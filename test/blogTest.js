@@ -29,4 +29,19 @@ describe("Dblog contract", function () {
     expect(blogDetails.blogOwner).to.equal(owner.address);
     expect(blogDetails.blogCreator).to.equal(owner.address);
   });
+
+  it("blogOwner should change after buying", async function () {
+    const [owner,user1] = await ethers.getSigners();
+    let txn = await dblogContract.createBlog('Sample blog title','Blog body is lorem ipsum',4,true,{ value: ethers.utils.parseEther("0.01") });
+    await txn.wait();
+
+    let blogDetails = await dblogContract.getABlog(0);
+    expect(blogDetails.blogOwner).to.equal(owner.address);
+
+    txn = await dblogContract.connect(user1).buyBlog(0, { value: ethers.utils.parseEther("0.004") });
+    await txn.wait();
+
+    blogDetails = await dblogContract.getABlog(0);
+    expect(blogDetails.blogOwner).to.equal(user1.address);
+  });
 });
