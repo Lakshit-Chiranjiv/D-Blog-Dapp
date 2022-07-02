@@ -24,5 +24,7 @@ describe("Dblog contract", function () {
     expect(blogDetails.blogBody).to.equal("Blog body is lorem ipsum");
     expect(blogDetails.salePrice).to.equal(ethers.utils.parseEther("0.004"));
     expect(blogDetails.onSale).to.equal(true);
+    expect(blogDetails.blogOwner).to.equal(owner.address);
+    expect(blogDetails.blogCreator).to.equal(owner.address);
   });
 });
