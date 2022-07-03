@@ -10,7 +10,7 @@ import Hero from './components/Hero'
 import Nav from './components/Nav'
 
 function App() {
-  const [page,setPage] = useState('create')
+  const [page,setPage] = useState('home')
 
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
