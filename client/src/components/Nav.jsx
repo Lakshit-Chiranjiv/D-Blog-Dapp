@@ -10,7 +10,7 @@ const Nav = () => {
             </div>
         </a>
         <div className="flex gap-10 items-center">
-            <NavItem navItemName='Read'/>
+            <NavItem navItemName='Read' linkLoc='#bloglist'/>
             <NavItem navItemName='Create'/>
             <NavItem navItemName='About'/>
         </div>
