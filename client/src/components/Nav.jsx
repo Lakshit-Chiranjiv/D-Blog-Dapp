@@ -1,7 +1,7 @@
 import React from 'react'
 import NavItem from './NavItem'
 
-const Nav = () => {
+const Nav = ({setPage}) => {
   return (
     <nav className='flex justify-around items-center py-6 mb-8 mx-16'>
         <a href="#">
@@ -10,9 +10,9 @@ const Nav = () => {
             </div>
         </a>
         <div className="flex gap-10 items-center">
-            <NavItem navItemName='Read' linkLoc='#bloglist'/>
-            <NavItem navItemName='Create'/>
-            <NavItem navItemName='About'/>
+            <NavItem navItemName='Read' linkLoc='#bloglist' navFunc={()=>{setPage('home')}}/>
+            <NavItem navItemName='Create' navFunc={()=>{setPage('create')}}/>
+            <NavItem navItemName='About' navFunc={()=>{setPage('about')}}/>
         </div>
     </nav>
   )
