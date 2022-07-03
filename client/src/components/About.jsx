@@ -1,6 +1,6 @@
 import React from 'react'
 
-const About = () => {
+const About = ({setPage}) => {
   return (
     <div className="my-8 text-white mx-16">
         <h2 className='text-3xl my-4 mb-6'>About Me</h2>
@@ -19,7 +19,7 @@ const About = () => {
             <a href="#" className='bg-sky-400 p-2 px-6 rounded hover:scale-105 transition-all'>Twitter</a>
         </div>
 
-        <button className="bg-purple-500 p-4 w-full rounded-lg my-6 hover:scale-95 transition-all">Head Over to the Home</button>
+        <button className="bg-purple-500 p-4 w-full rounded-lg my-6 hover:scale-95 transition-all" onClick={()=>{setPage('home')}}>Head Over to the Home</button>
 
     </div>
   )
