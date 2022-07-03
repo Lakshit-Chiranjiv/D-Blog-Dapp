@@ -4,7 +4,7 @@ import NavItem from './NavItem'
 const Nav = ({setPage}) => {
   return (
     <nav className='flex justify-around items-center py-6 mb-8 mx-16'>
-        <a href="#">
+        <a href="#" onClick={()=>{setPage('home')}}>
             <div className="bg-black p-4 rounded cursor-pointer">
                 <h1 className="text-4xl text-white"><span className='text-6xl'>D</span> Blog</h1>
             </div>
