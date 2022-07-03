@@ -24,7 +24,7 @@ function App() {
       }
       {
         page==='about' && 
-        <About/>
+        <About setPage={setPage}/>
       }
       {
         page==='create' &&
