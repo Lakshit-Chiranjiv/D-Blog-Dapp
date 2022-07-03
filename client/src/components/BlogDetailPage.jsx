@@ -7,6 +7,10 @@ const BlogDetailPage = ({title,body,owner,creator,readBy,onSale}) => {
         <h1 className='text-5xl p-3 border-gray-400 border-b text-left mb-8'>{title}</h1>
         <p className="text-left">{body}</p>
 
+        <div className="flex justify-center items-center p-4 my-6">
+            <img src="./../../assets/reading.svg" alt="reading" className='w-96' />
+        </div>
+
         <div className="flex gap-12 justify-evenly items-center my-6">
             <div className="">
                 <h4 className="text-2xl">Creator</h4>
