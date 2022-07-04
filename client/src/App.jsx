@@ -77,6 +77,30 @@ function App() {
     }
   }
 
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if(!ethereum){
+        console.log("No Wallet found, Install Metamask")
+        setConnectMsg("No Wallet found, Install Metamask")
+      }
+      else{
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
+        const userAccount = accounts[0]
+        console.log("Connected account : "+userAccount)
+        setConnectMsg(userAccount+" connected")
+        setAccount(userAccount)
+        // get all blogs func here
+      }
+    } catch (error) {
+      console.log(error)
+      setConnectMsg("Some error occured")
+    }
+
+  }
+
+
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
       <Nav setPage={setPage}/>
