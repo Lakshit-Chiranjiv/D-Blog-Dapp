@@ -31,6 +31,10 @@ function App() {
   const [detailPageReadBy,setDetailPageReadBy] = useState(0)
   const [detailPageSale,setDetailPageSale] = useState(false)
 
+  //message
+  const [connectMsg,setConnectMsg] = useState('')
+  const [publishMsg,setPublishMsg] = useState('')
+
   const detailContextValue = {
     title: detailPageTitle,
     body: detailPageBody,
