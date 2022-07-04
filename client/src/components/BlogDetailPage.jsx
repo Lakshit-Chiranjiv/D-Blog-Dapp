@@ -1,7 +1,14 @@
 import React from 'react'
+import { useContext } from 'react'
+import { DetailContext } from '../App'
 import Button from './Button'
 
-const BlogDetailPage = ({title,body,owner,creator,readBy,onSale}) => {
+
+const BlogDetailPage = () => {
+
+    const detailContextValues = useContext(DetailContext)
+    const {title,body,price,creator,owner,readBy,onSale} = detailContextValues
+
   return (
     <section className='bg-white rounded-xl p-8 mx-16 my-8'>
         <h1 className='text-5xl p-3 border-gray-400 border-b text-left mb-8'>{title}</h1>
@@ -33,7 +40,7 @@ const BlogDetailPage = ({title,body,owner,creator,readBy,onSale}) => {
             </div>
         </div>
 
-        <Button btnText='Buy Blog' txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
+        <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
     </section>
   )
 }
