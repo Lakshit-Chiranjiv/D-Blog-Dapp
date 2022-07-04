@@ -13,6 +13,8 @@ function App() {
   const [page,setPage] = useState('home')
   const [blogTitleInput,setBlogTitleInput] = useState('')
   const [blogBodyInput,setBlogBodyInput] = useState('')
+  const [blogPriceInput,setBlogPriceInput] = useState(0)
+  const [blogSaleInput,setBlogSaleInput] = useState(false)
 
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
@@ -30,7 +32,7 @@ function App() {
       }
       {
         page==='create' &&
-        <CreatePage blogTitleInput={blogTitleInput} blogBodyInput={blogBodyInput} setBlogTitleInput={setBlogTitleInput} setBlogBodyInput={setBlogBodyInput}/>
+        <CreatePage blogTitleInput={blogTitleInput} blogBodyInput={blogBodyInput} setBlogTitleInput={setBlogTitleInput} setBlogBodyInput={setBlogBodyInput} blogPriceInput={blogPriceInput} setBlogPriceInput={setBlogPriceInput} blogSaleInput={blogSaleInput} setBlogSaleInput={setBlogSaleInput}/>
       }
       {
         page==='details' &&
