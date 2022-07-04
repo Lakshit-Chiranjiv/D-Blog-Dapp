@@ -35,6 +35,9 @@ function App() {
   const [connectMsg,setConnectMsg] = useState('')
   const [publishMsg,setPublishMsg] = useState('')
 
+  //account
+  const [account,setAccount] = useState('')
+
   const detailContextValue = {
     title: detailPageTitle,
     body: detailPageBody,
@@ -43,6 +46,35 @@ function App() {
     owner: detailPageOwner,
     readBy: detailPageReadBy,
     onSale: detailPageSale
+  }
+
+  const checkWalletConnection = async () => {
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        console.log("ethereum object exists : ",ethereum)
+      }
+      else{
+        console.log("ethereum object doesn't exists, No wallet found")
+      }
+
+      const accounts = await ethereum.request({ method: 'eth_accounts' })
+
+      if(accounts.length != 0){
+        const userAccount = accounts[0]
+        console.log("User connected and authorized with account : "+userAccount)
+        setConnectMsg(userAccount+" connected")
+        setAccount(userAccount)
+        //get all blogs here
+      }
+      else{
+        console.log("No user accounts connected or authorized")
+      }
+
+    } catch (error) {
+      console.log("Message : "+error)
+    }
   }
 
   return (
