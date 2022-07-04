@@ -11,6 +11,8 @@ import Nav from './components/Nav'
 
 function App() {
   const [page,setPage] = useState('home')
+  const [blogTitleInput,setBlogTitleInput] = useState('')
+  const [blogBodyInput,setBlogBodyInput] = useState('')
 
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
@@ -28,7 +30,7 @@ function App() {
       }
       {
         page==='create' &&
-        <CreatePage/>
+        <CreatePage blogTitleInput={blogTitleInput} blogBodyInput={blogBodyInput} setBlogTitleInput={setBlogTitleInput} setBlogBodyInput={setBlogBodyInput}/>
       }
       {
         page==='details' &&
