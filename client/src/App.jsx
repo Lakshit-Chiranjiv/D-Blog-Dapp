@@ -144,6 +144,23 @@ function App() {
     }
   }
 
+  const readBlogHandler = async (blogId) => {
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
+
+        await dblogContract.readBlog(blogId);
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }
+  }
+
   useEffect(()=>{
     checkWalletConnection()
   },[])
