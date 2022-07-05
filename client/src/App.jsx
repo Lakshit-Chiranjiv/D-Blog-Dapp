@@ -74,7 +74,7 @@ function App() {
         console.log("User connected and authorized with account : "+userAccount)
         setConnectMsg("")
         setAccount(userAccount)
-        //get all blogs here
+        getAllBlogs()
       }
       else{
         console.log("No user accounts connected or authorized")
@@ -99,7 +99,7 @@ function App() {
         console.log("Connected account : "+userAccount)
         setConnectMsg("")
         setAccount(userAccount)
-        // get all blogs func here
+        getAllBlogs()
       }
     } catch (error) {
       console.log(error)
