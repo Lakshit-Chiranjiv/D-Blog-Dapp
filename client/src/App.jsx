@@ -1,5 +1,6 @@
 
 import { createContext } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import './App.css'
 import About from './components/About'
@@ -64,7 +65,7 @@ function App() {
       if(accounts.length != 0){
         const userAccount = accounts[0]
         console.log("User connected and authorized with account : "+userAccount)
-        setConnectMsg(userAccount+" connected")
+        setConnectMsg("")
         setAccount(userAccount)
         //get all blogs here
       }
@@ -89,16 +90,20 @@ function App() {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
         const userAccount = accounts[0]
         console.log("Connected account : "+userAccount)
-        setConnectMsg(userAccount+" connected")
+        setConnectMsg("")
         setAccount(userAccount)
         // get all blogs func here
       }
     } catch (error) {
       console.log(error)
-      setConnectMsg("Some error occured")
+      setConnectMsg("Connection Error")
     }
 
   }
+
+  useEffect(()=>{
+    checkWalletConnection()
+  },[])
 
 
   return (
@@ -110,7 +115,7 @@ function App() {
       {
         page==='home' && 
         <>
-          <Hero/>
+          <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
           <BlogList/>
         </>
       }
