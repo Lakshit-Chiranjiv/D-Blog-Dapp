@@ -10,8 +10,12 @@ import CreatePage from './components/CreatePage'
 import Footer from './components/Footer'
 import Hero from './components/Hero'
 import Nav from './components/Nav'
+import dblogAbi from './util/dblogContract.json'
 
 export const DetailContext = createContext()
+
+const dblogContractAddress = '0x93354F774D4D91ddEa0CF6c86541406280571Ded'
+const dblogContractABI = dblogAbi.abi
 
 function App() {
   //paging
@@ -100,6 +104,8 @@ function App() {
     }
 
   }
+
+
 
   useEffect(()=>{
     checkWalletConnection()
