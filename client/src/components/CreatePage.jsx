@@ -1,10 +1,10 @@
 import React from 'react'
 import Button from './Button'
 
-const CreatePage = ({blogTitleInput,setBlogTitleInput,blogBodyInput,setBlogBodyInput,blogPriceInput,setBlogPriceInput,blogSaleInput,setBlogSaleInput}) => {
+const CreatePage = ({blogTitleInput,setBlogTitleInput,blogBodyInput,setBlogBodyInput,blogPriceInput,setBlogPriceInput,blogSaleInput,setBlogSaleInput,createBlogHandler}) => {
   return (
     <section className='mx-16 my-8'>
-        <h2 className='text-3xl text-white '>Create your Blog </h2>
+        <h2 className='text-3xl text-white'>Create your Blog </h2>
         <div className="flex justify-center items-center gap-16">
             <img src="./../assets/publish.svg" alt="publish" className='w-96' />
             <div className="p-6">
@@ -23,7 +23,11 @@ const CreatePage = ({blogTitleInput,setBlogTitleInput,blogBodyInput,setBlogBodyI
                     <label htmlFor="onsale" className='text-white'>On sale</label>
                 </div>
 
-                <Button extraClasses='w-full' btnText='Publish Blog' txtSize='lg'/>
+                <a href="#" onClick={()=>{
+                    createBlogHandler(blogTitleInput,blogBodyInput,blogPriceInput,blogSaleInput)
+                }}>
+                    <Button extraClasses='w-full' btnText='Publish Blog' txtSize='lg'/>
+                </a>
             </div>
         </div>
     </section>
