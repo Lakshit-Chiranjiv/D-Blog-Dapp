@@ -43,6 +43,7 @@ contract DBlog{
     function readBlog(uint blogId) public {
         if(msg.sender != blogOwnersMap[blogId]){
             payable(blogOwnersMap[blogId]).transfer(0.0001 ether);
+            blogList[blogId].numOfReads++;
         }
     }
 
