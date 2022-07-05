@@ -1,4 +1,5 @@
 
+import { ethers } from 'ethers'
 import { createContext } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -170,8 +171,9 @@ function App() {
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
 
-        let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale);
+        let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale, { value: ethers.utils.parseEther("0.01") });
         await createTxn.wait()
+        getAllBlogs()
       }
 
     } catch (error) {
@@ -203,7 +205,7 @@ function App() {
       }
       {
         page==='create' &&
-        <CreatePage blogTitleInput={blogTitleInput} blogBodyInput={blogBodyInput} setBlogTitleInput={setBlogTitleInput} setBlogBodyInput={setBlogBodyInput} blogPriceInput={blogPriceInput} setBlogPriceInput={setBlogPriceInput} blogSaleInput={blogSaleInput} setBlogSaleInput={setBlogSaleInput}/>
+        <CreatePage blogTitleInput={blogTitleInput} blogBodyInput={blogBodyInput} setBlogTitleInput={setBlogTitleInput} setBlogBodyInput={setBlogBodyInput} blogPriceInput={blogPriceInput} setBlogPriceInput={setBlogPriceInput} blogSaleInput={blogSaleInput} setBlogSaleInput={setBlogSaleInput} createBlogHandler={createBlogHandler}/>
       }
       {
         page==='details' &&
