@@ -161,6 +161,24 @@ function App() {
     }
   }
 
+  const createBlogHandler = async (blogTitle,blogBody,blogPrice,blogOnSale) => {
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
+
+        let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale);
+        await createTxn.wait()
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }
+  }
+
   useEffect(()=>{
     checkWalletConnection()
   },[])
