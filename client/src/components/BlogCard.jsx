@@ -7,7 +7,7 @@ const BlogCard = ({title,snip,readBy,ownerShort}) => {
         <p className="text-sm mb-4">{snip}</p>
         <div className="flex justify-between items-center">
             <div className="mb-4">
-                <p className='text-sm'>read by : <span className='text-purple-500 text-md'>{readBy}</span></p>
+                <p className='text-sm'>read by : <span className='text-purple-500 text-md'>{Number(readBy.toString())}</span></p>
                 <p className='text-sm'>Owner : <span className='text-indigo-500 text-md'>{ownerShort}</span></p>
             </div>
             <button className='bg-purple-300 p-2 px-4 rounded hover:scale-95 hover:bg-purple-500 hover:text-white transition-all'>Read</button>
