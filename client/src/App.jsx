@@ -43,6 +43,9 @@ function App() {
   //account
   const [account,setAccount] = useState('')
 
+  //blogs
+  const [allBlogs,setAllBlogs] = useState([])
+
   const detailContextValue = {
     title: detailPageTitle,
     body: detailPageBody,
@@ -105,7 +108,40 @@ function App() {
 
   }
 
+  const getAllBlogs = async () => {
+    try {
+      const { ethereum } = window
 
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
+
+        const blogList = await dblogContract.getAllBlogs()
+
+        const furnishedBlogList = blogList.map(blog => (
+          {
+            title: blog.blogTitle,
+            body: blog.blogBody,
+            owner: blog.blogOwner,
+            creator: blog.blogCreator,
+            readBy: blog.numOfReads,
+            price: blog.salePrice,
+            onSale: blog.onSale
+          }
+        ))
+        console.log(furnishedBlogList)
+        setAllBlogs(furnishedBlogList.reverse())
+        // setListLoading(false)
+      }
+      else{
+        console.log("Ethereum object not found, Install Metamask")
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }
+  }
 
   useEffect(()=>{
     checkWalletConnection()
@@ -122,7 +158,7 @@ function App() {
         page==='home' && 
         <>
           <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
-          <BlogList/>
+          <BlogList allBlogs={allBlogs}/>
         </>
       }
       {
