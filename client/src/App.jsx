@@ -121,6 +121,7 @@ function App() {
 
         const furnishedBlogList = blogList.map(blog => (
           {
+            id: blog.blogId,
             title: blog.blogTitle,
             body: blog.blogBody,
             owner: blog.blogOwner,
