@@ -155,6 +155,7 @@ function App() {
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
 
         await dblogContract.readBlog(blogId);
+        setPage('details')
       }
 
     } catch (error) {
@@ -196,7 +197,7 @@ function App() {
         page==='home' && 
         <>
           <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
-          <BlogList allBlogs={allBlogs}/>
+          <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} />
         </>
       }
       {
