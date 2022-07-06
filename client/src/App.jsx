@@ -183,6 +183,26 @@ function App() {
     }
   }
 
+  const buyBlogHandler = async (blogId,blogPrice) => {
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
+
+        let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((0.001 * Number(blogPrice)).toString()) })
+        await buyTxn.wait()
+        getAllBlogs()
+        setPage('home')        
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }
+  }
+
   useEffect(()=>{
     checkWalletConnection()
   },[])
@@ -192,7 +212,7 @@ function App() {
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
       <Nav setPage={setPage}/>
       <button onClick={()=>{
-        setPage('details')
+        buyBlogHandler(0)
       }}>click</button>
       {
         page==='home' && 
