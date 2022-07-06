@@ -175,6 +175,7 @@ function App() {
         let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale, { value: ethers.utils.parseEther("0.01") });
         await createTxn.wait()
         getAllBlogs()
+        setPage('home')
       }
 
     } catch (error) {
