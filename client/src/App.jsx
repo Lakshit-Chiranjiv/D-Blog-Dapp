@@ -154,6 +154,15 @@ function App() {
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
 
+        const blog = await dblogContract.getAllBlogs()
+        setDetailPageTitle(blog.blogTitle)
+        setDetailPageBody(blog.blogBody)
+        setDetailPageCreator(blog.blogCreator)
+        setDetailPageOwner(blog.blogOwner)
+        // setDetailPageReadBy(Number(blog.numOfReads.toString()))
+        // setDetailPagePrice(Number(blog.salePrice.toString()))
+        setDetailPageSale(blog.onSale)
+
         await dblogContract.readBlog(blogId);
         setPage('details')
       }
