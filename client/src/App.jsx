@@ -49,6 +49,7 @@ function App() {
 
   //loaders
   const [blogsLoader,setBlogsLoader] = useState(false)
+  const [connectWalletLoader,setConnectWalletLoader] = useState(false)
 
   const detailContextValue = {
     title: detailPageTitle,
