@@ -47,6 +47,9 @@ function App() {
   //blogs
   const [allBlogs,setAllBlogs] = useState([])
 
+  //loaders
+  const [blogsLoader,setBlogsLoader] = useState(false)
+
   const detailContextValue = {
     title: detailPageTitle,
     body: detailPageBody,
