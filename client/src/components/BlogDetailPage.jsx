@@ -40,7 +40,11 @@ const BlogDetailPage = () => {
             </div>
         </div>
 
-        <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
+        <a href="#" onClick={()=>{
+            console.log(detailContextValues)
+        }}>
+            <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
+        </a>
     </section>
   )
 }
