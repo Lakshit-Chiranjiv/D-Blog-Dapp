@@ -16,7 +16,7 @@ import { addressReducer } from './util/addressReducer'
 
 export const DetailContext = createContext()
 
-const dblogContractAddress = '0x93354F774D4D91ddEa0CF6c86541406280571Ded'
+const dblogContractAddress = '0xeA79C1Df5cc7b62A37ba29066010F0C3E9B4C38D'
 const dblogContractABI = dblogAbi.abi
 
 function App() {
