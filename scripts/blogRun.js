@@ -27,6 +27,19 @@ async function main() {
         //checking blog owner
         console.log(blogDetails.blogOwner)
         console.log(blogDetails.blogOwner == owner.address)
+
+        //read blog
+        txn = await dblogContract.readBlog(0);
+        await txn.wait();
+        console.log("Blog read",txn.value);
+      
+        //get A Blog
+        blogDetails = await dblogContract.getABlog(0);
+        console.log(blogDetails);
+       
+        //checking blog owner
+        console.log(blogDetails.blogOwner)
+        console.log(blogDetails.blogOwner == owner.address)
       
         //buy blog
         txn = await dblogContract.connect(user1).buyBlog(0,{ value: ethers.utils.parseEther("0.004") })
