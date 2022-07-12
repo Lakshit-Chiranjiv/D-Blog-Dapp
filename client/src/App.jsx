@@ -170,8 +170,8 @@ function App() {
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
 
-        const blog = await dblogContract.getABlog(blogId);
         await dblogContract.readBlog(blogId);
+        const blog = await dblogContract.getABlog(blogId);
 
         updateDetailContextValues(blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),blog.blogCreator,blog.blogOwner,Number(blog.numOfReads.toString()),blog.onSale);
         setPage('details')
