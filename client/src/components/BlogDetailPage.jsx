@@ -1,6 +1,6 @@
 import React from 'react'
 import { useContext } from 'react'
-import { DetailContext } from '../App'
+import { DetailContext } from '../App.jsx'
 import Button from './Button'
 
 
