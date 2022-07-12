@@ -14,7 +14,7 @@ async function main() {
         ownerBalance = await owner.getBalance();
         console.log("owner balance after deploying :",ownerBalance.toString());
       
-        console.log("DBlog contract deployed on localhost to address:", dblogContract.address);
+        console.log("DBlog contract deployed on goerli to address:", dblogContract.address);
     } catch (error) {
         console.log(error.message)
     }
