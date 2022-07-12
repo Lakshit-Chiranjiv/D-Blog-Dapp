@@ -29,7 +29,7 @@ async function main() {
         console.log(blogDetails.blogOwner == owner.address)
 
         //read blog
-        txn = await dblogContract.readBlog(0);
+        txn = await dblogContract.connect(user2).readBlog(0);
         await txn.wait();
         console.log("Blog read",txn.value);
       
