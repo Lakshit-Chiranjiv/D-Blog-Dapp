@@ -12,6 +12,7 @@ import Footer from './components/Footer'
 import Hero from './components/Hero'
 import Nav from './components/Nav'
 import dblogAbi from './util/dblogContract.json'
+import { addressReducer } from './util/addressReducer'
 
 export const DetailContext = createContext()
 
@@ -66,8 +67,8 @@ function App() {
     setDetailPageTitle(title);
     setDetailPageBody(body);
     setDetailPagePrice(price);
-    setDetailPageCreator(creator);
-    setDetailPageOwner(owner);
+    setDetailPageCreator(addressReducer(creator));
+    setDetailPageOwner(addressReducer(owner));
     setDetailPageReadBy(readBy);
     setDetailPageSale(onSale);
   }
@@ -169,17 +170,10 @@ function App() {
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
 
-        const blog = await dblogContract.getAllBlogs()
+        const blog = await dblogContract.getABlog(blogId);
         await dblogContract.readBlog(blogId);
-        setDetailPageTitle(blog.blogTitle)
-        setDetailPageBody(blog.blogBody)
-        setDetailPageCreator(blog.blogCreator)
-        setDetailPageOwner(blog.blogOwner)
-        setDetailPageReadBy(Number(blog.numOfReads.toString()))
-        setDetailPagePrice(Number(blog.salePrice.toString()))
-        setDetailPageSale(blog.onSale)
 
-        await dblogContract.readBlog(blogId);
+        updateDetailContextValues(blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),blog.blogCreator,blog.blogOwner,Number(blog.numOfReads.toString()),blog.onSale);
         setPage('details')
       }
 
@@ -236,7 +230,8 @@ function App() {
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
       <Nav setPage={setPage}/>
       <button onClick={()=>{
-        buyBlogHandler(0)
+        // buyBlogHandler(0)
+        setPage('details')
       }}>click</button>
       {
         page==='home' && 
