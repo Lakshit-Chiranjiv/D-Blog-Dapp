@@ -62,6 +62,16 @@ function App() {
     onSale: detailPageSale
   }
 
+  const updateDetailContextValues = (title,body,price,creator,owner,readBy,onSale) => {
+    setDetailPageTitle(title);
+    setDetailPageBody(body);
+    setDetailPagePrice(price);
+    setDetailPageCreator(creator);
+    setDetailPageOwner(owner);
+    setDetailPageReadBy(readBy);
+    setDetailPageSale(onSale);
+  }
+
   const checkWalletConnection = async () => {
     try {
       const { ethereum } = window
