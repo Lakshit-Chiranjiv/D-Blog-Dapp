@@ -28,6 +28,7 @@ function App() {
   const [blogBodyInput,setBlogBodyInput] = useState('')
   const [blogPriceInput,setBlogPriceInput] = useState(0)
   const [blogSaleInput,setBlogSaleInput] = useState(false)
+  
 
   //blog details page data
   const [detailPageTitle,setDetailPageTitle] = useState('Blog Title')
@@ -210,7 +211,7 @@ function App() {
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
-
+        console.log((0.001 * Number(blogPrice)).toString())
         let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((0.001 * Number(blogPrice)).toString()) })
         await buyTxn.wait()
         getAllBlogs()       
@@ -251,7 +252,7 @@ function App() {
       {
         page==='details' &&
         <DetailContext.Provider value={detailContextValue} >
-          <BlogDetailPage/>
+          <BlogDetailPage buyBlogHandler={buyBlogHandler}/>
         </DetailContext.Provider>
       }
       <Footer/>
