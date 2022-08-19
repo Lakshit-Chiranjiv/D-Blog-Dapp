@@ -24,10 +24,21 @@ function App() {
   const [page,setPage] = useState('home')
 
   //input fields
-  const [blogTitleInput,setBlogTitleInput] = useState('')
-  const [blogBodyInput,setBlogBodyInput] = useState('')
-  const [blogPriceInput,setBlogPriceInput] = useState(0)
-  const [blogSaleInput,setBlogSaleInput] = useState(false)
+  const blogCreationInitialState = {
+    blogTitleInput: "",
+    blogBodyInput: "",
+    blogPriceInput: 0,
+    blogSaleInput: false
+  }
+  const [blogCreationInputs,setBlogCreationInputs] = useState(blogCreationInitialState);
+
+  const handleBlogCreationInput = (e) => {
+    const { name, value } = e.target;
+    setBlogCreationInputs({
+      ...blogCreationInputs,
+      [name]: value,
+    });
+  }
   
 
   //blog details page data
@@ -247,7 +258,7 @@ function App() {
       }
       {
         page==='create' &&
-        <CreatePage blogTitleInput={blogTitleInput} blogBodyInput={blogBodyInput} setBlogTitleInput={setBlogTitleInput} setBlogBodyInput={setBlogBodyInput} blogPriceInput={blogPriceInput} setBlogPriceInput={setBlogPriceInput} blogSaleInput={blogSaleInput} setBlogSaleInput={setBlogSaleInput} createBlogHandler={createBlogHandler}/>
+        <CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>
       }
       {
         page==='details' &&
