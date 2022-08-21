@@ -1,6 +1,5 @@
 
 import { ethers } from 'ethers'
-import { createContext } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import './App.css'
@@ -13,8 +12,6 @@ import Hero from './components/Hero'
 import Nav from './components/Nav'
 import dblogAbi from './util/dblogContract.json'
 import { addressReducer } from './util/addressReducer'
-
-export const DetailContext = createContext()
 
 const dblogContractAddress = '0xeA79C1Df5cc7b62A37ba29066010F0C3E9B4C38D'
 const dblogContractABI = dblogAbi.abi
@@ -42,13 +39,22 @@ function App() {
   
 
   //blog details page data
-  const [detailPageTitle,setDetailPageTitle] = useState('Blog Title')
-  const [detailPageBody,setDetailPageBody] = useState('Blog body lorem ipsum')
-  const [detailPagePrice,setDetailPagePrice] = useState(0)
-  const [detailPageCreator,setDetailPageCreator] = useState('scsc...3r2')
-  const [detailPageOwner,setDetailPageOwner] = useState('scs3...2cs')
-  const [detailPageReadBy,setDetailPageReadBy] = useState(0)
-  const [detailPageSale,setDetailPageSale] = useState(false)
+
+  const detailDisplayInitialState = {
+    title: "",
+    body: "",
+    price: 0,
+    creator: '',
+    owner: '',
+    readBy: 0,
+    onSale: false
+  }
+
+  const [detailsPageData,setDetailsPageData] = useState(detailDisplayInitialState);
+
+  const updateDetailPageData = (title,body,price,creator,owner,readBy,onSale) => {
+    setDetailsPageData({title,body,price,creator,owner,readBy,onSale})
+  }
 
   //message
   const [connectMsg,setConnectMsg] = useState('')
@@ -65,25 +71,6 @@ function App() {
   const [connectWalletLoader,setConnectWalletLoader] = useState(false)
   const [publishBlogLoader,setPublishBlogLoader] = useState(false)
 
-  const detailContextValue = {
-    title: detailPageTitle,
-    body: detailPageBody,
-    price: detailPagePrice,
-    creator: detailPageCreator,
-    owner: detailPageOwner,
-    readBy: detailPageReadBy,
-    onSale: detailPageSale
-  }
-
-  const updateDetailContextValues = (title,body,price,creator,owner,readBy,onSale) => {
-    setDetailPageTitle(title);
-    setDetailPageBody(body);
-    setDetailPagePrice(price);
-    setDetailPageCreator(addressReducer(creator));
-    setDetailPageOwner(addressReducer(owner));
-    setDetailPageReadBy(readBy);
-    setDetailPageSale(onSale);
-  }
 
   const checkWalletConnection = async () => {
     try {
@@ -182,10 +169,11 @@ function App() {
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
 
-        await dblogContract.readBlog(blogId);
+        let readTxn = await dblogContract.readBlog(blogId);
+        await readTxn.wait();
         const blog = await dblogContract.getABlog(blogId);
 
-        updateDetailContextValues(blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),blog.blogCreator,blog.blogOwner,Number(blog.numOfReads.toString()),blog.onSale);
+        updateDetailPageData(blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString())+1,blog.onSale);
         setPage('details')
       }
 
@@ -262,9 +250,7 @@ function App() {
       }
       {
         page==='details' &&
-        <DetailContext.Provider value={detailContextValue} >
-          <BlogDetailPage buyBlogHandler={buyBlogHandler}/>
-        </DetailContext.Provider>
+        <BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler}/>
       }
       <Footer/>
     </div>
