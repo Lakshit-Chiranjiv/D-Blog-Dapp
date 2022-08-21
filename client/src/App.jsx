@@ -173,7 +173,7 @@ function App() {
         await readTxn.wait();
         const blog = await dblogContract.getABlog(blogId);
 
-        updateDetailPageData(blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString())+1,blog.onSale);
+        updateDetailPageData(blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString()),blog.onSale);
         setPage('details')
       }
 
