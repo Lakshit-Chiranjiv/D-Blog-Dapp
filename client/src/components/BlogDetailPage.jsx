@@ -1,13 +1,10 @@
 import React from 'react'
-import { useContext } from 'react'
-import { DetailContext } from '../App.jsx'
 import Button from './Button'
 
 
-const BlogDetailPage = () => {
+const BlogDetailPage = ({detailsPageData,buyBlogHandler}) => {
 
-    const detailContextValues = useContext(DetailContext)
-    const {title,body,price,creator,owner,readBy,onSale} = detailContextValues
+    const {title,body,price,creator,owner,readBy,onSale} = detailsPageData
 
   return (
     <section className='bg-white rounded-xl p-8 mx-16 my-8'>
@@ -41,7 +38,8 @@ const BlogDetailPage = () => {
         </div>
 
         <a href="#" onClick={()=>{
-            console.log(detailContextValues)
+            // console.log(detailContextValues)
+            buyBlogHandler()
         }}>
             <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
         </a>
