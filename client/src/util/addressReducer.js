@@ -1,3 +1,3 @@
 export const addressReducer = (address) => {
-    return address.slice(0,4)+"..."+address.slice(-3);
+    return address.slice(0,4)+"..."+address.slice(-4);
 } 
