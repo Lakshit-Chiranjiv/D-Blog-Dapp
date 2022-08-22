@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavItem from './NavItem'
 
-const Nav = ({}) => {
+const Nav = ({account}) => {
 
   const navigate = useNavigate();
 
@@ -15,7 +15,10 @@ const Nav = ({}) => {
         </a>
         <div className="flex gap-10 items-center">
             <NavItem navItemName='Read' linkLoc='#bloglist' navFunc={()=>{navigate('/')}}/>
-            <NavItem navItemName='Create' navFunc={()=>{navigate('/create')}}/>
+            {
+              account &&
+              <NavItem navItemName='Create' navFunc={()=>{navigate('/create')}}/>
+            }
             <NavItem navItemName='About' navFunc={()=>{navigate('/about')}}/>
         </div>
     </nav>
