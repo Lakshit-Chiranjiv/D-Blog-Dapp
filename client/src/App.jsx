@@ -239,7 +239,7 @@ function App() {
         page==='home' && 
         <>
           <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
-          <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} />
+          <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} />
         </>
       }
       {
@@ -260,3 +260,11 @@ function App() {
 }
 
 export default App
+
+
+//implement react router
+//wire all react router links and navigations
+//conditional rendering based on blog owner
+//conditional rendering on btn clicks and loaders
+//blog put on and off sale feature based on conditions if the user is owner itself
+//conditionally hiding the buy btn if its the owner
