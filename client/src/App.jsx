@@ -19,6 +19,8 @@ const dblogContractABI = dblogAbi.abi
 
 function App() {
 
+  const navigate = useNavigate();
+
   //input fields
   const blogCreationInitialState = {
     blogTitleInput: "",
@@ -174,7 +176,7 @@ function App() {
         const blog = await dblogContract.getABlog(blogId);
 
         updateDetailPageData(blogId,blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString()),blog.onSale);
-        // setPage('details')
+        navigate('/details')
       }
 
     } catch (error) {
@@ -194,7 +196,7 @@ function App() {
         let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale, { value: ethers.utils.parseEther("0.01") });
         await createTxn.wait()
         getAllBlogs()
-        // setPage('home')
+        navigate('/')
       }
 
     } catch (error) {
@@ -214,7 +216,7 @@ function App() {
         let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((Number(blogPrice)).toString()) })
         await buyTxn.wait()
         getAllBlogs()
-        // setPage('home') 
+        navigate('/')
       }
 
     } catch (error) {
