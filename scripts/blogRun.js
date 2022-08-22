@@ -51,7 +51,7 @@ async function main() {
       
         //checking blog owner
         console.log(blogDetails.blogOwner)
-        console.log(blogDetails.blogOwner == user1.address)
+        console.log("checking if buying was successful",blogDetails.blogOwner == user1.address)
       
         //removing blog from sale
         txn = await dblogContract.connect(user1).removeBlogFromSale(0);
