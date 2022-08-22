@@ -18,8 +18,6 @@ const dblogContractAddress = '0xeA79C1Df5cc7b62A37ba29066010F0C3E9B4C38D'
 const dblogContractABI = dblogAbi.abi
 
 function App() {
-  //paging
-  const [page,setPage] = useState('home')
 
   //input fields
   const blogCreationInitialState = {
@@ -176,7 +174,7 @@ function App() {
         const blog = await dblogContract.getABlog(blogId);
 
         updateDetailPageData(blogId,blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString()),blog.onSale);
-        setPage('details')
+        // setPage('details')
       }
 
     } catch (error) {
@@ -196,7 +194,7 @@ function App() {
         let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale, { value: ethers.utils.parseEther("0.01") });
         await createTxn.wait()
         getAllBlogs()
-        setPage('home')
+        // setPage('home')
       }
 
     } catch (error) {
@@ -216,7 +214,7 @@ function App() {
         let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((Number(blogPrice)).toString()) })
         await buyTxn.wait()
         getAllBlogs()
-        setPage('home') 
+        // setPage('home') 
       }
 
     } catch (error) {
@@ -231,10 +229,10 @@ function App() {
 
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
-      <Nav setPage={setPage}/>
+      <Nav/>
       <button onClick={()=>{
         // buyBlogHandler(0)
-        setPage('details')
+        // setPage('details')
       }}>click</button>
 
       <Routes>
@@ -244,11 +242,11 @@ function App() {
             <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} />
           </>
         }/>
-        <Route path='/about' element={<About setPage={setPage}/>}/>
+        <Route path='/about' element={<About/>}/>
         <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>}/>
         <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler}/>}/>
       </Routes>
-      
+
       <Footer/>
     </div>
   )
