@@ -229,7 +229,7 @@ function App() {
 
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
-      <Nav/>
+      <Nav account={account}/>
       <button onClick={()=>{
         // buyBlogHandler(0)
         // setPage('details')
