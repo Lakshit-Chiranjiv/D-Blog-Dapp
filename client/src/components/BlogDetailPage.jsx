@@ -4,7 +4,7 @@ import Button from './Button'
 
 const BlogDetailPage = ({detailsPageData,buyBlogHandler}) => {
 
-    const {title,body,price,creator,owner,readBy,onSale} = detailsPageData
+    const {id,title,body,price,creator,owner,readBy,onSale} = detailsPageData
 
   return (
     <section className='bg-white rounded-xl p-8 mx-16 my-8'>
@@ -39,7 +39,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler}) => {
 
         <a href="#" onClick={()=>{
             // console.log(detailContextValues)
-            buyBlogHandler()
+            buyBlogHandler(id,price)
         }}>
             <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
         </a>
