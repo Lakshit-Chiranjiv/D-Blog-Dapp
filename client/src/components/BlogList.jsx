@@ -3,7 +3,7 @@ import BlogCard from './BlogCard'
 import { snipetizeBody } from './../util/snipetizeBody.js'
 import { addressReducer } from './../util/addressReducer.js'
 
-const BlogList = ({allBlogs,readBlogHandler}) => {
+const BlogList = ({allBlogs,readBlogHandler,account}) => {
   return (
     <section className='my-8 mx-16 py-4' id='bloglist'>
         <h2 className='text-4xl text-white mb-6 border-b-2 border-gray-400 p-2'>Published D-Blogs</h2>
@@ -20,8 +20,12 @@ const BlogList = ({allBlogs,readBlogHandler}) => {
             }
         </section>
         {
-          (allBlogs == 0) &&
+          (allBlogs == 0 && account) &&
           <p className='text-sm text-yellow-600 bg-white p-4 rounded my-4'>No Published Blogs 😕</p>
+        }
+        {
+          (!account) && 
+          <p className='text-sm text-purple-600 bg-white p-4 rounded my-4'>Connect your wallet 👛</p>
         }
     </section>
   )
