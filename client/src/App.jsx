@@ -214,7 +214,8 @@ function App() {
         console.log((Number(blogPrice)).toString())
         let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((Number(blogPrice)).toString()) })
         await buyTxn.wait()
-        getAllBlogs()       
+        getAllBlogs()
+        setPage('home') 
       }
 
     } catch (error) {
