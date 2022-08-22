@@ -12,6 +12,7 @@ import Hero from './components/Hero'
 import Nav from './components/Nav'
 import dblogAbi from './util/dblogContract.json'
 import { addressReducer } from './util/addressReducer'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 
 const dblogContractAddress = '0xeA79C1Df5cc7b62A37ba29066010F0C3E9B4C38D'
 const dblogContractABI = dblogAbi.abi
@@ -235,25 +236,19 @@ function App() {
         // buyBlogHandler(0)
         setPage('details')
       }}>click</button>
-      {
-        page==='home' && 
-        <>
-          <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
-          <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} />
-        </>
-      }
-      {
-        page==='about' && 
-          <About setPage={setPage}/>
-      }
-      {
-        page==='create' &&
-        <CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>
-      }
-      {
-        page==='details' &&
-        <BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler}/>
-      }
+
+      <Routes>
+        <Route path='/' element={
+          <>
+            <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
+            <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} />
+          </>
+        }/>
+        <Route path='/about' element={<About setPage={setPage}/>}/>
+        <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>}/>
+        <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler}/>}/>
+      </Routes>
+      
       <Footer/>
     </div>
   )
