@@ -41,6 +41,7 @@ function App() {
   //blog details page data
 
   const detailDisplayInitialState = {
+    id: -1,
     title: "",
     body: "",
     price: 0,
@@ -52,8 +53,8 @@ function App() {
 
   const [detailsPageData,setDetailsPageData] = useState(detailDisplayInitialState);
 
-  const updateDetailPageData = (title,body,price,creator,owner,readBy,onSale) => {
-    setDetailsPageData({title,body,price,creator,owner,readBy,onSale})
+  const updateDetailPageData = (id,title,body,price,creator,owner,readBy,onSale) => {
+    setDetailsPageData({id,title,body,price,creator,owner,readBy,onSale})
   }
 
   //message
@@ -173,7 +174,7 @@ function App() {
         await readTxn.wait();
         const blog = await dblogContract.getABlog(blogId);
 
-        updateDetailPageData(blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString()),blog.onSale);
+        updateDetailPageData(blogId,blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString()),blog.onSale);
         setPage('details')
       }
 
@@ -210,8 +211,8 @@ function App() {
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
-        console.log((0.001 * Number(blogPrice)).toString())
-        let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((0.001 * Number(blogPrice)).toString()) })
+        console.log((Number(blogPrice)).toString())
+        let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((Number(blogPrice)).toString()) })
         await buyTxn.wait()
         getAllBlogs()       
       }
