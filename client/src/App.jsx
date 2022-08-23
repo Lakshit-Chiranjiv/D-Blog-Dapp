@@ -246,8 +246,14 @@ function App() {
           </>
         }/>
         <Route path='/about' element={<About/>}/>
-        <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>}/>
-        <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler}/>}/>
+        {
+          account && 
+          <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>}/>
+        }
+        {
+          detailsPageData.title && 
+          <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler}/>}/>
+        }
         <Route path='*' element={<NotFoundPage/>}/>
       </Routes>
 
