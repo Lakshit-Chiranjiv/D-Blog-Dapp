@@ -1,8 +1,9 @@
+import { ethers } from 'ethers'
 import React from 'react'
 import Button from './Button'
 
 
-const BlogDetailPage = ({detailsPageData,buyBlogHandler}) => {
+const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer}) => {
 
     const {id,title,body,price,creator,owner,readBy,onSale} = detailsPageData
 
@@ -22,7 +23,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler}) => {
             </div>
             <div className="">
                 <h4 className="text-2xl">Owner</h4>
-                <h5 className="text-xl text-purple-400">{owner}</h5>
+                <h5 className="text-xl text-purple-400">{addressReducer(owner)}</h5>
             </div>
             <div className="">
                 <h4 className="text-2xl">Read by</h4>
@@ -36,13 +37,15 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler}) => {
                 }
             </div>
         </div>
-
-        <a href="#" onClick={()=>{
-            // console.log(detailContextValues)
-            buyBlogHandler(id,price)
-        }}>
-            <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
-        </a>
+        {
+            (ethers.utils.getAddress(account) !== owner) &&
+            <a href="#" onClick={()=>{
+                
+                buyBlogHandler(id,price)
+            }}>
+                <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
+            </a>
+        }
     </section>
   )
 }
