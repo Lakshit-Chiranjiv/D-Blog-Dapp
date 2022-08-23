@@ -176,7 +176,7 @@ function App() {
         await readTxn.wait();
         const blog = await dblogContract.getABlog(blogId);
 
-        updateDetailPageData(blogId,blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),addressReducer(blog.blogOwner),Number(blog.numOfReads.toString()),blog.onSale);
+        updateDetailPageData(blogId,blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),blog.blogOwner,Number(blog.numOfReads.toString()),blog.onSale);
         navigate('/details')
       }
 
@@ -233,9 +233,23 @@ function App() {
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
       <Nav account={account}/>
-      <button onClick={()=>{
-        // buyBlogHandler(0)
-        // setPage('details')
+      <button onClick={async()=>{
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
+
+        const blog = await dblogContract.getABlog(0);
+        console.log(blog.blogOwner)
+        console.log((ethers.utils.getAddress(account) !== blog.blogOwner))
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }
       }}>click</button>
 
       <Routes>
@@ -252,7 +266,7 @@ function App() {
         }
         {
           detailsPageData.title && 
-          <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler}/>}/>
+          <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler} account={account} addressReducer={addressReducer}/>}/>
         }
         <Route path='*' element={<NotFoundPage/>}/>
       </Routes>
@@ -265,11 +279,12 @@ function App() {
 export default App
 
 
-//implement react router
-//wire all react router links and navigations
+//implement react router...x
+//wire all react router links and navigations...x
 //conditional rendering based on blog owner
 //conditional rendering on btn clicks and loaders
 //blog put on and off sale feature based on conditions if the user is owner itself
 //conditionally hiding the buy btn if its the owner
-//notfound page
-//notfound page render conditionally on create and details route
+//notfound page...x
+//notfound page render conditionally on create and details route...x
+// responsiveness
