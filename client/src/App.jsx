@@ -257,7 +257,7 @@ function App() {
 
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
-      <Nav account={account}/>
+      <Nav account={account} getAllBlogs={getAllBlogs}/>
       <button onClick={()=>{
         console.log(detailsPageData);
       }}>click</button>
