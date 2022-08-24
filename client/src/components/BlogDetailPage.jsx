@@ -53,11 +53,10 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer})
                     <label htmlFor="onsale" className=''>Put ON/OFF Sale</label>
                 </div>
                 <a>
-                    <Button btnText='Save new Sale Status' extraClasses='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 p-4 hover:text-black'/>
+                    <Button btnText='Save new Sale Status' extraClasses='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 hover:bg-gradient-to-t from-gray-400 via-emerald-200 to-gray-900 p-4 hover:text-black shadow hover:shadow'/>
                 </a>
             </div>
         }
-
 
     </section>
   )
