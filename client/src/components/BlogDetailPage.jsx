@@ -38,14 +38,27 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer})
             </div>
         </div>
         {
-            (ethers.utils.getAddress(account) !== owner) &&
+            (ethers.utils.getAddress(account) !== owner) ?
             <a href="#" onClick={()=>{
                 
                 buyBlogHandler(id,price)
             }}>
                 <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
-            </a>
+            </a>:
+            <div className='grid grid-cols-2 justify-around items-center'>
+                <div className="flex justify-center items-center gap-2 my-6">
+                    <input type="checkbox" name="blogSaleInput" id="onsale" className='h-6 w-8' checked={false} onChange={(e)=>{
+                        // handleBlogCreationInput(e)
+                    }}/>
+                    <label htmlFor="onsale" className=''>Put ON/OFF Sale</label>
+                </div>
+                <a>
+                    <Button btnText='Save new Sale Status' extraClasses='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 p-4 hover:text-black'/>
+                </a>
+            </div>
         }
+
+
     </section>
   )
 }
