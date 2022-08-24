@@ -54,6 +54,7 @@ function App() {
   }
 
   const [detailsPageData,setDetailsPageData] = useState(detailDisplayInitialState);
+  const [saleStatusCheck,setSaleStatusCheck] = useState(detailsPageData.onSale);
 
   const updateDetailPageData = (id,title,body,price,creator,owner,readBy,onSale) => {
     setDetailsPageData({id,title,body,price,creator,owner,readBy,onSale})
@@ -177,6 +178,7 @@ function App() {
         const blog = await dblogContract.getABlog(blogId);
 
         updateDetailPageData(blogId,blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),blog.blogOwner,Number(blog.numOfReads.toString()),blog.onSale);
+        setSaleStatusCheck(blog.onSale);
         navigate('/details')
       }
 
@@ -272,10 +274,7 @@ function App() {
           account && 
           <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>}/>
         }
-        {
-          detailsPageData.title && 
-          <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler} account={account} addressReducer={addressReducer}/>}/>
-        }
+        <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler} account={account} addressReducer={addressReducer} changeBlogSaleStatus={changeBlogSaleStatus} saleStatusCheck={saleStatusCheck} setSaleStatusCheck={setSaleStatusCheck}/>}/>
         <Route path='*' element={<NotFoundPage/>}/>
       </Routes>
 
@@ -298,3 +297,4 @@ export default App
 // responsiveness
 //contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought
 //createPage onsale input error resolve...x
+//little indicator in blog tile to tell sale status
