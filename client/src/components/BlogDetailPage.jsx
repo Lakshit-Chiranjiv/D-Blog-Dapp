@@ -3,7 +3,7 @@ import React from 'react'
 import Button from './Button'
 
 
-const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer}) => {
+const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,changeBlogSaleStatus,saleStatusCheck,setSaleStatusCheck}) => {
 
     const {id,title,body,price,creator,owner,readBy,onSale} = detailsPageData
 
@@ -39,20 +39,29 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer})
         </div>
         {
             (ethers.utils.getAddress(account) !== owner) ?
-            <a href="#" onClick={()=>{
+            (
+                onSale &&
+                <a href="#" onClick={()=>{
                 
-                buyBlogHandler(id,price)
-            }}>
-                <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
-            </a>:
+                    buyBlogHandler(id,price)
+                }}>
+                    <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
+                </a>
+            ):
             <div className='grid grid-cols-2 justify-around items-center'>
                 <div className="flex justify-center items-center gap-2 my-6">
-                    <input type="checkbox" name="blogSaleInput" id="onsale" className='h-6 w-8' checked={false} onChange={(e)=>{
-                        // handleBlogCreationInput(e)
+                    <input type="checkbox" name="blogSaleStatusChanger" id="onsale" className='h-6 w-8' checked={saleStatusCheck} onChange={(e)=>{
+                        setSaleStatusCheck(e.target.checked)
                     }}/>
                     <label htmlFor="onsale" className=''>Put ON/OFF Sale</label>
                 </div>
-                <a>
+                <a onClick={()=>{
+                    let status = (saleStatusCheck)?1:0;
+                    if(onSale !== saleStatusCheck)
+                        changeBlogSaleStatus(status,id);
+                    else
+                        console.log("Same status value");
+                }}>
                     <Button btnText='Save new Sale Status' extraClasses='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 hover:bg-gradient-to-t from-gray-400 via-emerald-200 to-gray-900 p-4 hover:text-black shadow hover:shadow'/>
                 </a>
             </div>
