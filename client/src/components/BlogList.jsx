@@ -15,7 +15,7 @@ const BlogList = ({allBlogs,readBlogHandler,account}) => {
             <BlogCard title='Blog title' snip='blog snippet' readBy={342} ownerShort='rrcs...4f3'/> */}
             {
               allBlogs.map((blog,i) => (
-                <BlogCard bid={blog.id} title={blog.title} snip={snipetizeBody(blog.body)} readBy={blog.readBy} ownerShort={addressReducer(blog.owner)} key={i} readBlogHandler={readBlogHandler}/>
+                <BlogCard bid={blog.id} title={blog.title} snip={snipetizeBody(blog.body)} readBy={blog.readBy} ownerShort={addressReducer(blog.owner)} key={i} readBlogHandler={readBlogHandler} saleStatus={blog.onSale}/>
               ))
             }
         </section>
