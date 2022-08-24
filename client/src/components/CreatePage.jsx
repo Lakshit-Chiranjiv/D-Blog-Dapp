@@ -19,7 +19,9 @@ const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandle
                 <p className='text-red-400 mb-6 text-[12px]'>Note : Entered value will be multiplied by 0.001 eth</p>
 
                 <div className="flex justify-center items-center gap-2 mb-6">
-                    <input type="checkbox" name="blogSaleInput" id="onsale" className='h-6 w-8' checked={blogCreationInputs.blogSaleInput} onChange={handleBlogCreationInput}/>
+                    <input type="checkbox" name="blogSaleInput" id="onsale" className='h-6 w-8' checked={blogCreationInputs.blogSaleInput} onChange={(e)=>{
+                        handleBlogCreationInput(e)
+                    }}/>
                     <label htmlFor="onsale" className='text-white'>On sale</label>
                 </div>
 
