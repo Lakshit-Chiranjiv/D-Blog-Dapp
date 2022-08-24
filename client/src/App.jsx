@@ -32,10 +32,10 @@ function App() {
   const [blogCreationInputs,setBlogCreationInputs] = useState(blogCreationInitialState);
 
   const handleBlogCreationInput = (e) => {
-    const { name, value } = e.target;
+    const { name, value, checked, type } = e.target;
     setBlogCreationInputs({
       ...blogCreationInputs,
-      [name]: value,
+      [name]: (type === 'checkbox')?checked:value,
     });
   }
   
@@ -252,6 +252,8 @@ function App() {
     }
       }}>click</button>
 
+      <BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler} account={'0x1D83cb3Ce06962281023e1598A6dFF6D27329Ef7'} addressReducer={addressReducer}/>
+
       <Routes>
         <Route path='/' element={
           <>
@@ -284,7 +286,9 @@ export default App
 //conditional rendering based on blog owner
 //conditional rendering on btn clicks and loaders
 //blog put on and off sale feature based on conditions if the user is owner itself
-//conditionally hiding the buy btn if its the owner
+//conditionally hiding the buy btn if its the owner...x
 //notfound page...x
 //notfound page render conditionally on create and details route...x
 // responsiveness
+//contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought
+//createPage onsale input error resolve
