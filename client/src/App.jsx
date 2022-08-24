@@ -26,7 +26,7 @@ function App() {
   const blogCreationInitialState = {
     blogTitleInput: "",
     blogBodyInput: "",
-    blogPriceInput: 0,
+    blogPriceInput: 2,
     blogSaleInput: false
   }
   const [blogCreationInputs,setBlogCreationInputs] = useState(blogCreationInitialState);
