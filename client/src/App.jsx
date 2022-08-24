@@ -213,9 +213,32 @@ function App() {
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
-        console.log((Number(blogPrice)).toString())
         let buyTxn = await dblogContract.buyBlog(blogId, { value: ethers.utils.parseEther((Number(blogPrice)).toString()) })
         await buyTxn.wait()
+        getAllBlogs()
+        navigate('/')
+      }
+
+    } catch (error) {
+        console.log("Some error occured : "+error)
+    }
+  }
+
+  const changeBlogSaleStatus = async(status,blogId) => {
+    try {
+      const { ethereum } = window
+
+      if(ethereum){
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
+        let changeTxn 
+        if(status === 1)
+          changeTxn = await dblogContract.putBlogOnSale(blogId)
+        else 
+          changeTxn = await dblogContract.removeBlogFromSale(blogId)
+          
+        await changeTxn.wait()
         getAllBlogs()
         navigate('/')
       }
@@ -233,26 +256,9 @@ function App() {
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
       <Nav account={account}/>
-      <button onClick={async()=>{
-    try {
-      const { ethereum } = window
-
-      if(ethereum){
-        const provider = new ethers.providers.Web3Provider(ethereum)
-        const signer = provider.getSigner()
-        const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
-
-        const blog = await dblogContract.getABlog(0);
-        console.log(blog.blogOwner)
-        console.log((ethers.utils.getAddress(account) !== blog.blogOwner))
-      }
-
-    } catch (error) {
-        console.log("Some error occured : "+error)
-    }
+      <button onClick={()=>{
+        console.log(detailsPageData);
       }}>click</button>
-
-      <BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler} account={'0x1D83cb3Ce06962281023e1598A6dFF6D27329Ef7'} addressReducer={addressReducer}/>
 
       <Routes>
         <Route path='/' element={
@@ -283,12 +289,12 @@ export default App
 
 //implement react router...x
 //wire all react router links and navigations...x
-//conditional rendering based on blog owner
+//conditional rendering based on blog owner...x
 //conditional rendering on btn clicks and loaders
-//blog put on and off sale feature based on conditions if the user is owner itself
+//blog put on and off sale feature based on conditions if the user is owner itself functions
 //conditionally hiding the buy btn if its the owner...x
 //notfound page...x
 //notfound page render conditionally on create and details route...x
 // responsiveness
 //contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought
-//createPage onsale input error resolve
+//createPage onsale input error resolve...x
