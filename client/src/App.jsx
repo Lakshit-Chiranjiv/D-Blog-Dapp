@@ -289,12 +289,12 @@ export default App
 //implement react router...x
 //wire all react router links and navigations...x
 //conditional rendering based on blog owner...x
-//conditional rendering on btn clicks and loaders
-//blog put on and off sale feature based on conditions if the user is owner itself functions
+//blog put on and off sale feature based on conditions if the user is owner itself functions...x
 //conditionally hiding the buy btn if its the owner...x
 //notfound page...x
 //notfound page render conditionally on create and details route...x
-// responsiveness
-//contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought
 //createPage onsale input error resolve...x
-//little indicator in blog tile to tell sale status
+//little indicator in blog tile to tell sale status...x
+//contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought
+// responsiveness
+//conditional rendering on btn clicks and loaders
