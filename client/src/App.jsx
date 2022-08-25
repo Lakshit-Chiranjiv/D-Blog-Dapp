@@ -15,7 +15,7 @@ import { addressReducer } from './util/addressReducer'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import NotFoundPage from './components/NotFoundPage'
 
-const dblogContractAddress = '0xeA79C1Df5cc7b62A37ba29066010F0C3E9B4C38D'
+const dblogContractAddress = '0x46bD031d1eCc579b60baA10BFDac37D2eA926bC2'
 const dblogContractABI = dblogAbi.abi
 
 function App() {
@@ -295,6 +295,6 @@ export default App
 //notfound page render conditionally on create and details route...x
 //createPage onsale input error resolve...x
 //little indicator in blog tile to tell sale status...x
-//contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought
+//contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought...x
 // responsiveness
 //conditional rendering on btn clicks and loaders
