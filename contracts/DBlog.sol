@@ -28,6 +28,7 @@ contract DBlog{
     Blog[] blogList;
 
     mapping(uint => address) blogOwnersMap;
+    mapping(uint => address) blogCreatorsMap;
 
     //0.0001 ether for someone else reading - from contract to the blog Owner
     //0.01 ether to create a blog - from blog Creator to contract
@@ -42,7 +43,10 @@ contract DBlog{
 
     function readBlog(uint blogId) public {
         if(msg.sender != blogOwnersMap[blogId]){
-            payable(blogOwnersMap[blogId]).transfer(0.0001 ether);
+            if(blogCreatorsMap[blogId] != blogOwnersMap[blogId] && msg.sender == blogCreatorsMap[blogId]){}
+            else{
+                payable(blogOwnersMap[blogId]).transfer(0.0001 ether);
+            }
             blogList[blogId].numOfReads++;
         }
     }
@@ -53,6 +57,7 @@ contract DBlog{
         require(bytes(_blogTitle).length > 3,"Blog title length should be more than 3 characters");
         blogList.push(Blog(blogCount,msg.sender,msg.sender,_blogTitle,_blogBody,0,(_salePrice * (0.001 ether)),_onSale));
         blogOwnersMap[blogCount] = msg.sender;
+        blogCreatorsMap[blogCount] = msg.sender;
         blogCount++;
     }
 
