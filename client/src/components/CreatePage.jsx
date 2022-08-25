@@ -4,8 +4,8 @@ import Button from './Button'
 const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandler}) => {
   return (
     <section className='mx-16 my-8'>
-        <h2 className='text-3xl text-white'>Create your Blog </h2>
-        <div className="flex justify-center items-center gap-16">
+        <h2 className='text-3xl text-white mb-8'>Create your Blog </h2>
+        <div className="grid grid-cols-1 items-center md:grid-cols-2 gap-16">
             <img src="./../assets/publish.svg" alt="publish" className='w-96' />
             <div className="p-6">
                 <label htmlFor="name" className='text-left text-white '>Blog Title</label>
