@@ -14,6 +14,7 @@ import dblogAbi from './util/dblogContract.json'
 import { addressReducer } from './util/addressReducer'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import NotFoundPage from './components/NotFoundPage'
+import Loader from './components/Loader'
 
 const dblogContractAddress = '0x46bD031d1eCc579b60baA10BFDac37D2eA926bC2'
 const dblogContractABI = dblogAbi.abi
@@ -74,6 +75,9 @@ function App() {
   const [blogsLoader,setBlogsLoader] = useState(false)
   const [connectWalletLoader,setConnectWalletLoader] = useState(false)
   const [publishBlogLoader,setPublishBlogLoader] = useState(false)
+  const [readBlogLoader,setReadBlogLoader] = useState(false)
+  const [buyBlogLoader,setBuyBlogLoader] = useState(false)
+  const [saleStatusChangeBlogLoader,setSaleStatusChangeBlogLoader] = useState(false)
 
 
   const checkWalletConnection = async () => {
@@ -133,6 +137,7 @@ function App() {
       const { ethereum } = window
 
       if(ethereum){
+        setBlogsLoader(true)
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
@@ -153,14 +158,16 @@ function App() {
         ))
         console.log(furnishedBlogList)
         setAllBlogs(furnishedBlogList.reverse())
-        // setListLoading(false)
+        setBlogsLoader(false)
       }
       else{
         console.log("Ethereum object not found, Install Metamask")
+        setBlogsLoader(false)
       }
 
     } catch (error) {
         console.log("Some error occured : "+error)
+        setBlogsLoader(false)
     }
   }
 
@@ -263,7 +270,7 @@ function App() {
         <Route path='/' element={
           <>
             <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
-            <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} />
+            <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} blogsLoader={blogsLoader} />
           </>
         }/>
         <Route path='/about' element={<About/>}/>
