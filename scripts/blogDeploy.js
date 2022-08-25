@@ -8,8 +8,8 @@ async function main() {
         let ownerBalance = await owner.getBalance();
         const DBlog = await ethers.getContractFactory("DBlog");
         console.log("owner balance before deploying :",ownerBalance.toString());
-        const dblogContract = await DBlog.deploy();
-        // const dblogContract = await DBlog.deploy({ value: ethers.utils.parseEther("5.0") });
+        // const dblogContract = await DBlog.deploy();
+        const dblogContract = await DBlog.deploy({ value: ethers.utils.parseEther("0.4") });
         await dblogContract.deployed();
         ownerBalance = await owner.getBalance();
         console.log("owner balance after deploying :",ownerBalance.toString());
