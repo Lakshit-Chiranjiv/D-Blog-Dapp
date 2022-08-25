@@ -13,7 +13,7 @@ const About = () => {
         <p>This Application allows user to create blogs with a fees and when someone reads that blog, the owner earns a small amount everytime. Here users can also sell there blogs and on each blog transaction almost 90% of listed blog price is given to the blog owner and 10% amount is earned by this application owner. Its a very dynamic application and I hope the users will love to use this.</p>
 
         <h3 className='text-xl my-4 mt-8'>Contact Me</h3>
-        <div className="flex gap-8 justify-evenly items-center my-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 my-8">
             <a href="#" className='bg-black p-2 px-6 rounded hover:scale-105 transition-all'>Github</a>
             <a href="#" className='bg-blue-600 p-2 px-6 rounded hover:scale-105 transition-all'>LinkedIn</a>
             <a href="#" className='bg-sky-400 p-2 px-6 rounded hover:scale-105 transition-all'>Twitter</a>
