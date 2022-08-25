@@ -1,9 +1,11 @@
 import React from 'react'
+import { addressReducer } from '../util/addressReducer'
 import Button from './Button'
 
 const Hero = ({account,connectMsg,connectWallet}) => {
+
   return (
-    <section className='flex gap-12 justify-around items-center py-6 mb-8 mx-16'>
+    <section className='grid grid-cols-1 md:grid-cols-2 items-center gap-12 py-6 mb-8 mx-16'>
         <img src="../assets/blog.svg" alt="" className='w-96'/>
         <div>
             {
@@ -14,7 +16,7 @@ const Hero = ({account,connectMsg,connectWallet}) => {
             }
             {
               account &&
-              <p className='text-sm text-green-500 bg-white p-4 rounded mt-4'>Connected <br /> {account}</p>
+              <p className='text-sm text-green-500 bg-white p-4 rounded mt-4'>Connected <br /> {((window.innerWidth < 1025 && window.innerWidth > 767) || (window.innerWidth < 565))?addressReducer(account):account}</p>
             }
             {
               connectMsg && 
