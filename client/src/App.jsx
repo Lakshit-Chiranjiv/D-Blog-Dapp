@@ -258,9 +258,6 @@ function App() {
   return (
     <div className="App bg-gradient-to-tl from-slate-500 via-gray-700 to-neutral-400 mb-0">
       <Nav account={account} getAllBlogs={getAllBlogs}/>
-      <button onClick={()=>{
-        console.log(detailsPageData);
-      }}>click</button>
 
       <Routes>
         <Route path='/' element={
@@ -285,16 +282,4 @@ function App() {
 
 export default App
 
-
-//implement react router...x
-//wire all react router links and navigations...x
-//conditional rendering based on blog owner...x
-//blog put on and off sale feature based on conditions if the user is owner itself functions...x
-//conditionally hiding the buy btn if its the owner...x
-//notfound page...x
-//notfound page render conditionally on create and details route...x
-//createPage onsale input error resolve...x
-//little indicator in blog tile to tell sale status...x
-//contract feature, the creator won't get ethers if he/she himself doing reads on his/her blog which has been bought...x
-// responsiveness
 //conditional rendering on btn clicks and loaders
