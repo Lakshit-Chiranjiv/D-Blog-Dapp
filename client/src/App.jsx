@@ -90,7 +90,7 @@ function App() {
       else{
         console.log("ethereum object doesn't exists, No wallet found")
       }
-
+      setConnectWalletLoader(true)
       const accounts = await ethereum.request({ method: 'eth_accounts' })
 
       if(accounts.length != 0){
@@ -98,14 +98,17 @@ function App() {
         console.log("User connected and authorized with account : "+userAccount)
         setConnectMsg("")
         setAccount(userAccount)
+        setConnectWalletLoader(false)
         getAllBlogs()
       }
       else{
         console.log("No user accounts connected or authorized")
+        setConnectWalletLoader(false)
       }
 
     } catch (error) {
       console.log("Message : "+error)
+      setConnectWalletLoader(false)
     }
   }
 
@@ -118,16 +121,19 @@ function App() {
         setConnectMsg("No Wallet found, Install Metamask")
       }
       else{
+        setConnectWalletLoader(true)
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
         const userAccount = accounts[0]
         console.log("Connected account : "+userAccount)
         setConnectMsg("")
         setAccount(userAccount)
+        setConnectWalletLoader(false)
         getAllBlogs()
       }
     } catch (error) {
       console.log(error)
       setConnectMsg("Connection Error")
+      setConnectWalletLoader(false)
     }
 
   }
@@ -269,7 +275,7 @@ function App() {
       <Routes>
         <Route path='/' element={
           <>
-            <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet}/>
+            <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet} connectWalletLoader={connectWalletLoader}/>
             <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} blogsLoader={blogsLoader} />
           </>
         }/>
