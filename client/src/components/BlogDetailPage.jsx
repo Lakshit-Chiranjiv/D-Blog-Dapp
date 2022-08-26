@@ -45,7 +45,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
                 (
                     buyBlogLoader ?
                     <Loader/>:
-                    <a href="#" onClick={()=>{
+                    <a onClick={()=>{
                 
                         buyBlogHandler(id,price)
                     }}>
