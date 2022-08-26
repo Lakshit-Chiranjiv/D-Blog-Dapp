@@ -2,7 +2,7 @@ import React from 'react'
 import Button from './Button'
 import Loader from './Loader'
 
-const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandler,publishBlogLoader}) => {
+const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandler,publishBlogLoader,publishMsg}) => {
   return (
     <section className='mx-16 my-8'>
         <h2 className='text-3xl text-white mb-8'>Create your Blog </h2>
@@ -29,11 +29,15 @@ const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandle
                 {
                     publishBlogLoader ? 
                     <Loader/>:
-                    <a href="#" onClick={()=>{
+                    <a onClick={()=>{
                         createBlogHandler(blogCreationInputs.blogTitleInput,blogCreationInputs.blogBodyInput,blogCreationInputs.blogPriceInput,blogCreationInputs.blogSaleInput)
                     }}>
                         <Button extraClasses='w-full' btnText='Publish Blog' txtSize='lg'/>
                     </a>
+                }
+                {
+                    publishMsg && 
+                    <p className={`${publishMsg === 'Published Successfully'? 'text-green-500': 'text-red-400'}  my-6 text-[12px]`}>{publishMsg}</p>
                 }
             </div>
         </div>
