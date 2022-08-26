@@ -14,9 +14,9 @@ const About = () => {
 
         <h3 className='text-xl my-4 mt-8'>Contact Me</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 justify-items-center gap-8 my-8">
-            <a href="#" className='bg-black p-2 px-6 min-w-[150px] rounded hover:scale-105 transition-all'>Github</a>
-            <a href="#" className='bg-blue-600 p-2 px-6 min-w-[150px] rounded hover:scale-105 transition-all'>LinkedIn</a>
-            <a href="#" className='bg-sky-400 p-2 px-6 min-w-[150px] rounded hover:scale-105 transition-all'>Twitter</a>
+            <a href="https://github.com/Lakshit-Chiranjiv" target='_blank' className='bg-black p-2 px-6 min-w-[150px] rounded hover:scale-105 transition-all'>Github</a>
+            <a href="https://www.linkedin.com/in/lakshit-chiranjiv-sagar-4b0b15198/" target='_blank' className='bg-blue-600 p-2 px-6 min-w-[150px] rounded hover:scale-105 transition-all'>LinkedIn</a>
+            <a href="https://twitter.com/lakshit_cs" target='_blank' className='bg-sky-400 p-2 px-6 min-w-[150px] rounded hover:scale-105 transition-all'>Twitter</a>
         </div>
 
         <Link to='/'>
