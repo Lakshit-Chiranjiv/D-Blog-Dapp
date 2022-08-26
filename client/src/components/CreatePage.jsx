@@ -1,7 +1,8 @@
 import React from 'react'
 import Button from './Button'
+import Loader from './Loader'
 
-const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandler}) => {
+const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandler,publishBlogLoader}) => {
   return (
     <section className='mx-16 my-8'>
         <h2 className='text-3xl text-white mb-8'>Create your Blog </h2>
@@ -25,11 +26,15 @@ const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandle
                     <label htmlFor="onsale" className='text-white'>On sale</label>
                 </div>
 
-                <a href="#" onClick={()=>{
-                    createBlogHandler(blogCreationInputs.blogTitleInput,blogCreationInputs.blogBodyInput,blogCreationInputs.blogPriceInput,blogCreationInputs.blogSaleInput)
-                }}>
-                    <Button extraClasses='w-full' btnText='Publish Blog' txtSize='lg'/>
-                </a>
+                {
+                    publishBlogLoader ? 
+                    <Loader/>:
+                    <a href="#" onClick={()=>{
+                        createBlogHandler(blogCreationInputs.blogTitleInput,blogCreationInputs.blogBodyInput,blogCreationInputs.blogPriceInput,blogCreationInputs.blogSaleInput)
+                    }}>
+                        <Button extraClasses='w-full' btnText='Publish Blog' txtSize='lg'/>
+                    </a>
+                }
             </div>
         </div>
     </section>
