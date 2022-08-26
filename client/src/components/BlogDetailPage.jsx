@@ -53,7 +53,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
                     </a>
                 )
             ):
-            <div className='grid sm:grid-cols-2 justify-around items-center'>
+            <div className='grid sm:grid-cols-2 justify-items-center items-center'>
                 <div className="flex justify-center items-center gap-2 my-6">
                     <input type="checkbox" name="blogSaleStatusChanger" id="onsale" className='h-6 w-8' checked={saleStatusCheck} onChange={(e)=>{
                         setSaleStatusCheck(e.target.checked)

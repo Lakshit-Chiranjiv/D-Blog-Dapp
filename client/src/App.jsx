@@ -285,7 +285,7 @@ function App() {
 
     } catch (error) {
         console.log("Some error occured : "+error)
-        saleStatusChangeBlogLoader(false)
+        setSaleStatusChangeBlogLoader(false)
     }
   }
 
@@ -321,4 +321,4 @@ function App() {
 
 export default App
 
-//conditional rendering on btn clicks and loaders
+//responsiveness of details page
