@@ -204,19 +204,22 @@ function App() {
     try {
       const { ethereum } = window
 
-      if(ethereum){
+      if(ethereum && blogTitle && blogBody && blogPrice && blogOnSale){
+        setPublishBlogLoader(true)
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
 
         let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale, { value: ethers.utils.parseEther("0.01") });
         await createTxn.wait()
+        setPublishBlogLoader(false)
         getAllBlogs()
         navigate('/')
       }
 
     } catch (error) {
         console.log("Some error occured : "+error)
+        setPublishBlogLoader(false)
     }
   }
 
@@ -282,7 +285,7 @@ function App() {
         <Route path='/about' element={<About/>}/>
         {
           account && 
-          <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler}/>}/>
+          <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler} publishBlogLoader={publishBlogLoader}/>}/>
         }
         <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler} account={account} addressReducer={addressReducer} changeBlogSaleStatus={changeBlogSaleStatus} saleStatusCheck={saleStatusCheck} setSaleStatusCheck={setSaleStatusCheck}/>}/>
         <Route path='*' element={<NotFoundPage/>}/>
