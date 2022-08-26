@@ -206,8 +206,14 @@ function App() {
   const createBlogHandler = async (blogTitle,blogBody,blogPrice,blogOnSale) => {
     try {
       const { ethereum } = window
+      if(!blogTitle || !blogBody || !blogPrice){
+        setPublishMsg('Fill up all fields')
+        setTimeout(()=>{
+          setPublishMsg('')
+        },5000)
+      }
 
-      if(ethereum && blogTitle && blogBody && blogPrice && blogOnSale){
+      if(ethereum && blogTitle && blogBody && blogPrice){
         setPublishBlogLoader(true)
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
@@ -215,6 +221,10 @@ function App() {
 
         let createTxn = await dblogContract.createBlog(blogTitle,blogBody,blogPrice,blogOnSale, { value: ethers.utils.parseEther("0.01") });
         await createTxn.wait()
+        setPublishMsg('Published Successfully')
+        setTimeout(()=>{
+          setPublishMsg('')
+        },3000)
         setPublishBlogLoader(false)
         getAllBlogs()
         navigate('/')
@@ -222,6 +232,10 @@ function App() {
 
     } catch (error) {
         console.log("Some error occured : "+error)
+        setPublishMsg("Some Error occured");
+        setTimeout(()=>{
+          setPublishMsg('')
+        },3000)
         setPublishBlogLoader(false)
     }
   }
@@ -294,7 +308,7 @@ function App() {
         <Route path='/about' element={<About/>}/>
         {
           account && 
-          <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler} publishBlogLoader={publishBlogLoader}/>}/>
+          <Route path='/create' element={<CreatePage blogCreationInputs={blogCreationInputs} handleBlogCreationInput={handleBlogCreationInput} createBlogHandler={createBlogHandler} publishBlogLoader={publishBlogLoader} publishMsg={publishMsg}/>}/>
         }
         <Route path='/details' element={<BlogDetailPage detailsPageData={detailsPageData} buyBlogHandler={buyBlogHandler} account={account} addressReducer={addressReducer} changeBlogSaleStatus={changeBlogSaleStatus} saleStatusCheck={saleStatusCheck} setSaleStatusCheck={setSaleStatusCheck} buyBlogLoader={buyBlogLoader} saleStatusChangeBlogLoader={saleStatusChangeBlogLoader}/>}/>
         <Route path='*' element={<NotFoundPage/>}/>
