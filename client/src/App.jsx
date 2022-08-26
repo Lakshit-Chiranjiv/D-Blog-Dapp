@@ -182,6 +182,7 @@ function App() {
       const { ethereum } = window
 
       if(ethereum){
+        setReadBlogLoader(true)
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner()
         const dblogContract = new ethers.Contract(dblogContractAddress,dblogContractABI,signer)
@@ -192,11 +193,13 @@ function App() {
 
         updateDetailPageData(blogId,blog.blogTitle,blog.blogBody,Number(ethers.utils.formatEther(blog.salePrice).toString()),addressReducer(blog.blogCreator),blog.blogOwner,Number(blog.numOfReads.toString()),blog.onSale);
         setSaleStatusCheck(blog.onSale);
+        setReadBlogLoader(false)
         navigate('/details')
       }
 
     } catch (error) {
         console.log("Some error occured : "+error)
+        setReadBlogLoader(false)
     }
   }
 
@@ -285,7 +288,7 @@ function App() {
         <Route path='/' element={
           <>
             <Hero account={account} connectMsg={connectMsg} connectWallet={connectWallet} connectWalletLoader={connectWalletLoader}/>
-            <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} blogsLoader={blogsLoader} />
+            <BlogList allBlogs={allBlogs} readBlogHandler={readBlogHandler} account={account} blogsLoader={blogsLoader} readBlogLoader={readBlogLoader}/>
           </>
         }/>
         <Route path='/about' element={<About/>}/>
