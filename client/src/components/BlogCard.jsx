@@ -1,6 +1,7 @@
 import React from 'react'
+import Loader from './Loader'
 
-const BlogCard = ({bid,title,snip,readBy,ownerShort,readBlogHandler,saleStatus}) => {
+const BlogCard = ({bid,title,snip,readBy,ownerShort,readBlogHandler,saleStatus,readBlogLoader}) => {
   return (
     <div className='bg-white rounded-lg shadow-2xl py-4 px-6 flex-1 text-left hover:scale-95 transition-all'>
         <h3 className="text-2xl mb-2">{title}</h3>
@@ -15,7 +16,11 @@ const BlogCard = ({bid,title,snip,readBy,ownerShort,readBlogHandler,saleStatus})
                   <div className='w-2 h-2 mt-2 rounded-full bg-red-500'></div>
                 }
             </div>
-            <button className='bg-purple-300 p-2 px-4 rounded hover:scale-95 hover:bg-purple-500 hover:text-white transition-all' onClick={()=>{readBlogHandler(bid)}}>Read</button>
+            {
+              readBlogLoader ?
+              <Loader/>:
+              <button className='bg-purple-300 p-2 px-4 rounded hover:scale-95 hover:bg-purple-500 hover:text-white transition-all' onClick={()=>{readBlogHandler(bid)}}>Read</button>
+            }
         </div>
     </div>
   )
