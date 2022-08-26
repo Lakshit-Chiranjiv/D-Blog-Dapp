@@ -17,7 +17,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
             <img src="./../../assets/reading.svg" alt="reading" className='w-96' />
         </div>
 
-        <div className="flex gap-12 justify-evenly items-center my-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 items-center my-6">
             <div className="">
                 <h4 className="text-2xl">Creator</h4>
                 <h5 className="text-xl text-purple-400">{creator}</h5>
@@ -53,7 +53,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
                     </a>
                 )
             ):
-            <div className='grid grid-cols-2 justify-around items-center'>
+            <div className='grid sm:grid-cols-2 justify-around items-center'>
                 <div className="flex justify-center items-center gap-2 my-6">
                     <input type="checkbox" name="blogSaleStatusChanger" id="onsale" className='h-6 w-8' checked={saleStatusCheck} onChange={(e)=>{
                         setSaleStatusCheck(e.target.checked)
