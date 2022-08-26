@@ -4,7 +4,7 @@ import { snipetizeBody } from './../util/snipetizeBody.js'
 import { addressReducer } from './../util/addressReducer.js'
 import Loader from './Loader'
 
-const BlogList = ({allBlogs,readBlogHandler,account,blogsLoader}) => {
+const BlogList = ({allBlogs,readBlogHandler,account,blogsLoader,readBlogLoader}) => {
   return (
     <section className='my-8 mx-16 py-4' id='bloglist'>
         <h2 className='text-4xl text-white mb-6 border-b-2 border-gray-400 p-2'>Published D-Blogs</h2>
@@ -19,7 +19,7 @@ const BlogList = ({allBlogs,readBlogHandler,account,blogsLoader}) => {
               <BlogCard title='Blog title' snip='blog snippet' readBy={342} ownerShort='rrcs...4f3'/> */}
               {
                 allBlogs.map((blog,i) => (
-                  <BlogCard bid={blog.id} title={blog.title} snip={snipetizeBody(blog.body)} readBy={blog.readBy} ownerShort={addressReducer(blog.owner)} key={i} readBlogHandler={readBlogHandler} saleStatus={blog.onSale}/>
+                  <BlogCard bid={blog.id} title={blog.title} snip={snipetizeBody(blog.body)} readBy={blog.readBy} ownerShort={addressReducer(blog.owner)} key={i} readBlogHandler={readBlogHandler} saleStatus={blog.onSale} readBlogLoader={readBlogLoader}/>
                 ))
               }
           </section>
