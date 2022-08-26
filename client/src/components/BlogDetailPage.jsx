@@ -63,15 +63,13 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
                 {
                     saleStatusChangeBlogLoader ?
                     <Loader/>:
-                    <a onClick={()=>{
-                        let status = (saleStatusCheck)?1:0;
-                        if(onSale !== saleStatusCheck)
-                            changeBlogSaleStatus(status,id);
-                        else
-                            console.log("Same status value");
-                    }}>
-                        <Button btnText='Save new Sale Status' extraClasses='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 hover:bg-gradient-to-t from-gray-400 via-emerald-200 to-gray-900 p-4 hover:text-black shadow hover:shadow'/>
-                    </a>
+                    <button className='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 p-4 shadow rounded hover:bg-gradient-to-t from-gray-400 via-emerald-200 to-gray-900 transition-all hover:scale-105' onClick={()=>{
+                    let status = (saleStatusCheck)?1:0;
+                    if(onSale !== saleStatusCheck)
+                        changeBlogSaleStatus(status,id);
+                    else
+                        console.log("Same status value");
+                    }}>Save new Sale Status</button>
                 }
             </div>
         }
