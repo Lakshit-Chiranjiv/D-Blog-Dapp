@@ -4,7 +4,7 @@ import Button from './Button'
 import Loader from './Loader'
 
 
-const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,changeBlogSaleStatus,saleStatusCheck,setSaleStatusCheck,buyBlogLoader}) => {
+const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,changeBlogSaleStatus,saleStatusCheck,setSaleStatusCheck,buyBlogLoader,saleStatusChangeBlogLoader}) => {
 
     const {id,title,body,price,creator,owner,readBy,onSale} = detailsPageData
 
@@ -60,15 +60,19 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
                     }}/>
                     <label htmlFor="onsale" className=''>Put ON/OFF Sale</label>
                 </div>
-                <a onClick={()=>{
-                    let status = (saleStatusCheck)?1:0;
-                    if(onSale !== saleStatusCheck)
-                        changeBlogSaleStatus(status,id);
-                    else
-                        console.log("Same status value");
-                }}>
-                    <Button btnText='Save new Sale Status' extraClasses='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 hover:bg-gradient-to-t from-gray-400 via-emerald-200 to-gray-900 p-4 hover:text-black shadow hover:shadow'/>
-                </a>
+                {
+                    saleStatusChangeBlogLoader ?
+                    <Loader/>:
+                    <a onClick={()=>{
+                        let status = (saleStatusCheck)?1:0;
+                        if(onSale !== saleStatusCheck)
+                            changeBlogSaleStatus(status,id);
+                        else
+                            console.log("Same status value");
+                    }}>
+                        <Button btnText='Save new Sale Status' extraClasses='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 hover:bg-gradient-to-t from-gray-400 via-emerald-200 to-gray-900 p-4 hover:text-black shadow hover:shadow'/>
+                    </a>
+                }
             </div>
         }
 
