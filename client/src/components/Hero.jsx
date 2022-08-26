@@ -2,12 +2,13 @@ import React from 'react'
 import { addressReducer } from '../util/addressReducer'
 import Button from './Button'
 import Loader from './Loader'
+import blogImg from './../assets/blog.svg'
 
 const Hero = ({account,connectMsg,connectWallet,connectWalletLoader}) => {
 
   return (
     <section className='grid grid-cols-1 md:grid-cols-2 items-center gap-12 py-6 mb-8 mx-16'>
-        <img src="../assets/blog.svg" alt="" className='w-96'/>
+        <img src={blogImg} alt="" className='w-96'/>
         <div>
           {
             connectWalletLoader ? 

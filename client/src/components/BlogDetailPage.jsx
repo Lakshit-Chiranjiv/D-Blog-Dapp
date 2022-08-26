@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 import React from 'react'
 import Button from './Button'
 import Loader from './Loader'
+import readingImg from './../assets/reading.svg'
 
 
 const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,changeBlogSaleStatus,saleStatusCheck,setSaleStatusCheck,buyBlogLoader,saleStatusChangeBlogLoader}) => {
@@ -14,7 +15,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
         <p className="text-left">{body}</p>
 
         <div className="flex justify-center items-center p-4 my-6">
-            <img src="./../../assets/reading.svg" alt="reading" className='w-96' />
+            <img src={readingImg} alt="reading" className='w-96' />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 items-center my-6">

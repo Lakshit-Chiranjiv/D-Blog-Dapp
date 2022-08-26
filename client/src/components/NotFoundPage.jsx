@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import lostImg from './../assets/lost.svg'
 
 const NotFoundPage = () => {
   return (
@@ -8,7 +9,7 @@ const NotFoundPage = () => {
         <p className='text-gray-300'>Seems you are Lost</p>
 
         <div className="flex justify-center items-center p-4 my-6">
-            <img src="./../../assets/lost.svg" alt="lost" className='w-96' />
+            <img src={lostImg} alt="lost" className='w-96' />
         </div>
 
         <Link to='/'>

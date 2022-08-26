@@ -1,13 +1,14 @@
 import React from 'react'
 import Button from './Button'
 import Loader from './Loader'
+import publishImg from './../assets/publish.svg'
 
 const CreatePage = ({blogCreationInputs,handleBlogCreationInput,createBlogHandler,publishBlogLoader,publishMsg}) => {
   return (
     <section className='mx-16 my-8'>
         <h2 className='text-3xl text-white mb-8'>Create your Blog </h2>
         <div className="grid grid-cols-1 items-center md:grid-cols-2 gap-16">
-            <img src="./../assets/publish.svg" alt="publish" className='w-96' />
+            <img src={publishImg} alt="publish" className='w-96' />
             <div className="p-6">
                 <label htmlFor="name" className='text-left text-white '>Blog Title</label>
                 <input type="text" name='blogTitleInput' className='w-full my-2 rounded p-4 h-12 border-none mb-6' value={blogCreationInputs.blogTitleInput} onChange={handleBlogCreationInput} placeholder='Enter blog title'/>
