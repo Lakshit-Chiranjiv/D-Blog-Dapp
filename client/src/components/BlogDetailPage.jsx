@@ -63,7 +63,7 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
                 {
                     saleStatusChangeBlogLoader ?
                     <Loader/>:
-                    <button className='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 p-4 shadow rounded hover:bg-gradient-to-t from-gray-400 via-emerald-200 to-gray-900 transition-all hover:scale-105' onClick={()=>{
+                    <button className='bg-gradient-to-tr from-slate-500 via-green-200 to-green-900 p-4 shadow rounded transition-all hover:scale-105 hover:bg-gradient-to-t from-teal-600 via-green-200 to-emerald-600' onClick={()=>{
                     let status = (saleStatusCheck)?1:0;
                     if(onSale !== saleStatusCheck)
                         changeBlogSaleStatus(status,id);
