@@ -1,9 +1,10 @@
 import { ethers } from 'ethers'
 import React from 'react'
 import Button from './Button'
+import Loader from './Loader'
 
 
-const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,changeBlogSaleStatus,saleStatusCheck,setSaleStatusCheck}) => {
+const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,changeBlogSaleStatus,saleStatusCheck,setSaleStatusCheck,buyBlogLoader}) => {
 
     const {id,title,body,price,creator,owner,readBy,onSale} = detailsPageData
 
@@ -41,12 +42,16 @@ const BlogDetailPage = ({detailsPageData,buyBlogHandler,account,addressReducer,c
             (ethers.utils.getAddress(account) !== owner) ?
             (
                 onSale &&
-                <a href="#" onClick={()=>{
+                (
+                    buyBlogLoader ?
+                    <Loader/>:
+                    <a href="#" onClick={()=>{
                 
-                    buyBlogHandler(id,price)
-                }}>
-                    <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
-                </a>
+                        buyBlogHandler(id,price)
+                    }}>
+                        <Button btnText={`Buy Blog at ${price} ETH`} txtSize='xl' extraClasses='mt-6 bg-green-400 shadow-none w-full hover:bg-gradient-to-bl from-gray-200 via-gray-900 to-green-600'/>
+                    </a>
+                )
             ):
             <div className='grid grid-cols-2 justify-around items-center'>
                 <div className="flex justify-center items-center gap-2 my-6">
